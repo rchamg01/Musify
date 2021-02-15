@@ -8,11 +8,11 @@
             <v-col class="flex-grow-1 flex-shrink-0">
               <h1 class="pb-3">{{ this.user }}, aquí tienes tu top de artistas: </h1> 
             </v-col>
-            <v-col class="flex-shrink-0 flex-grow-1">
-              <v-select v-model="select" rounded :items="options" @keyup.enter="send" label="Tiempo" color="rgba(255,255,255)" filled></v-select>
+            <v-col >
+              <v-select dense v-model="select" :menu-props="{ bottom: true, offsetY: true }" rounded :items="options" @keyup.enter="send" label="Tiempo" color="white" filled></v-select>
             </v-col>
-            <v-col class="flex-shrink-0 flex-grow-1">
-              <v-select v-model="select2" rounded :items="options2" @keyup.enter="send" label="Nº artistas" color="rgba(255,255,255)" filled></v-select>
+            <v-col>
+              <v-select dense v-model="select2" :menu-props="{ bottom: true, offsetY: true }" rounded :items="options2" @keyup.enter="send" label="Nº artistas" color="white" filled></v-select>
             </v-col>
             <v-col class="flex-grow-0 flex-shrink-1">
               <v-btn class="white--text" elevation="0" x-large color="rgba(255, 255, 255, 0.2)" rounded @click="send" >Mostrar</v-btn>
@@ -26,15 +26,20 @@
                     <v-row>
                       <v-col class="flex-grow-0 flex-shrink-1"> 
                         <v-img class="profile_pic" :aspect-ratio="1/1" :src="item.images[0].url">
-                          <v-btn class="profile_pic" height="160" color="rgb(0,0,0,0.2)" target="_blank" :href="item.external_urls.spotify">
+                        <v-tooltip color="rgb(255,255,255,0.3)" bottom>
+                          <template v-slot:activator="{ on, attrs }">
+                          <v-btn class="button_sq" height="160" color="rgb(0,0,0,0.2)" target="_blank" v-on="on" v-bind="attrs" :href="item.external_urls.spotify">
                             <h1 class="text-h1 font-weight-bold white--text">{{index+1}}</h1>
                           </v-btn>
+                          </template>
+                          <span>link al artista</span>
+                          </v-tooltip>
                         </v-img>
                       </v-col>
                       <v-col >
                         <v-card-text class="overflow-y-auto">
-                          <v-list color="rgb(0,0,0,0)" dense>
-                            <v-subheader class="pt-1"><h1 class="font-weight-bold">{{ item.name }}</h1></v-subheader>
+                          <v-list class="list" dense>
+                            <v-subheader class="pt-5 text-h5 font-weight-bold">{{ item.name }}</v-subheader>
                             <v-list-item-group  class="pt-4" color="rgb(0,0,0)">
                               <v-list-item dense v-for="genres in item.genres" :key="genres">
                                 <v-list-item-content>
@@ -129,11 +134,28 @@ export default {
   html {
     overflow: hidden !important;
   }
-
   .v-list{
+    background: #ffffffcb !important;
+  }
+  .v-list-item:active {
+    opacity: 0.14;
+  }
+    .v-list .v-list-item--active { 
+    background-color: rgba(255, 255, 255, 0) !important; 
+  }
+  .v-list .v-list-item--active::before {
+    color: #00000000 !important;
+  }
+
+  .v-subheader { 
+    min-height: 80px;
+  }
+  
+  .list {
     height:150px;
     width:165px;
-    overflow-y:auto
+    overflow-y:auto;
+    background: rgb(0,0,0,0) !important;
   }
 
   .v-card {
@@ -157,12 +179,20 @@ export default {
     transform: translate(-50%, -50%);
   }
 
-  .profile_pic {
+  .button_sq {
     width: 150px;
     border-radius: 5%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .profile_pic {
+    width: 150px;
+    border-radius: 5%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
   }
 
   ::-webkit-scrollbar {

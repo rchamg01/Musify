@@ -9,10 +9,10 @@
               <h1 class="pb-3">{{ this.user }}, aquí tienes tu top de canciones: </h1> 
             </v-col>
             <v-col class="flex-shrink-0 flex-grow-1">
-              <v-select v-model="select" :items="options" label="Tiempo" color="rgba(255,255,255)" filled rounded></v-select>
+              <v-select dense v-model="select" :items="options" :menu-props="{ bottom: true, offsetY: true }" label="Tiempo" color="rgba(255,255,255)" filled rounded></v-select>
             </v-col>
             <v-col class="flex-shrink-0 flex-grow-1">
-              <v-select v-model="select2" :items="options2" label="Nº canciones" color="rgba(255,255,255)" filled rounded></v-select>
+              <v-select dense v-model="select2" :items="options2" :menu-props="{ bottom: true, offsetY: true }" label="Nº canciones" color="rgba(255,255,255)" filled rounded></v-select>
             </v-col>
             <v-col class="flex-grow-0 flex-shrink-1">
               <v-btn class="white--text" elevation="0" x-large color="rgba(255, 255, 255, 0.2)" rounded @click="send" >Mostrar</v-btn>
@@ -26,9 +26,14 @@
                     <v-row>
                       <v-col class="flex-grow-0 flex-shrink-1"> 
                         <v-img class="profile_pic" :aspect-ratio="1/1" :src="item.album.images[0].url">
-                            <v-btn class="profile_pic" height="160" color="rgb(0,0,0,0.2)" target="_blank" :href="item.external_urls.spotify">
-                              <h1 class="text-h1 font-weight-bold white--text">{{index+1}}</h1>
-                            </v-btn>
+                          <v-tooltip color="rgb(255,255,255,0.3)" bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                              <v-btn class="profile_pic" height="160" color="rgb(0,0,0,0.2)" target="_blank" v-on="on" v-bind="attrs" :href="item.external_urls.spotify">
+                                <h1 class="text-h1 font-weight-bold white--text">{{index+1}}</h1>
+                              </v-btn>
+                            </template>
+                            <span>link a la canción</span>
+                          </v-tooltip>
                         </v-img>
                       </v-col>
                       <v-col >

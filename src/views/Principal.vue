@@ -51,7 +51,7 @@ export default {
                 
                 },
                 { 
-                title: 'Wiki cualidades de la música',
+                title: 'Glosario cualidades de la música',
                 link: "/features"
                 },
                 { 

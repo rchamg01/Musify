@@ -15,10 +15,20 @@
                 <iframe :src="track" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
               </v-col>
               <v-col class="flex-grow-0 flex-shrink-1">
-                <v-btn class="white--text" elevation="0" x-large color="rgba(255, 255, 255, 0.2)" rounded @click="send">Play</v-btn>
+                <v-tooltip color="rgb(255,255,255,0)" bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn class="white--text" elevation="0" x-large color="rgba(255, 255, 255, 0.2)" rounded v-on="on" v-bind="attrs" @click="send">Play</v-btn>
+                  </template>
+                  <span>Reproduce canciones, álbumes o listas introduciendo un link válido de Spotify.</span>
+                </v-tooltip>
               </v-col>
               <v-col>
-                <v-btn class="white--text" elevation="0" x-large color="rgba(255, 255, 255, 0.2)" rounded @click="find">Search info</v-btn>
+                <v-tooltip color="rgb(255,255,255,0)" bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn class="white--text" elevation="0" x-large color="rgba(255, 255, 255, 0.2)" rounded v-on="on" v-bind="attrs" @click="find">Search info</v-btn>
+                  </template>
+                  <span>Encontrarás más información sobre las cualidades del sonido en la Wiki del menú.</span>
+                </v-tooltip>
                 <div v-if="loaded" class="pt-6">
                   <v-card class="pa-8 rounded-xl" flat color="rgba(255,255,255,0.2)">
                     <v-row>
