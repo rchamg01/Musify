@@ -6,8 +6,8 @@ const querystring = require("query-string");
 const app = express();
 app.use(express.static(__dirname + "/public")).use(cors());
 
-const client_id = "bd3966fb1632480b8f804762288479ea";
-const client_secret = "04a17ebb19064b4684de3ad59d7a92fb";
+const client_id = ""; //insert your client id
+const client_secret = ""; //insert your client secret
 const redirect_uri = "http://localhost:8082/callback/";
 const server_address = "http://localhost:8080?";
 const frontend_server_port = "8082"; // Vue server port
